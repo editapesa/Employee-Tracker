@@ -4,6 +4,7 @@
 ## Description
 
 ## Installation
+In the code editor, select the folder to use and open the Integrated Terminal (or GitBash). From there run npm init -y, followed by npm i mysql, npm i inquirer, and npm i console.table. 
 
 ## License
 This project is licensed under the MIT license. Click the link below for more info.
