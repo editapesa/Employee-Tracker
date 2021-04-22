@@ -13,7 +13,8 @@ create table role (
     id integer not null auto_increment,
     title varchar(30) not null,
     salary decimal(19, 2) not null,
-    department_id integer not null auto_increment,
+    department_id integer not null,
+    foreign key (department_id) references department(id),
     primary key (id)
 );
 
@@ -21,8 +22,10 @@ create table employee (
     id integer not null auto_increment,
     first_name varchar(30) not null,
     last_name varchar(30) not null,
-    role_id integer not null auto_increment,
-    manager_id integer null auto_increment,
+    role_id integer not null,
+    manager_id integer null,
+    foreign key (role_id) references role(id),
+    foreign key (manager_id) references employee(id),
     primary key (id)
 );
 
