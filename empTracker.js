@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
     if (err) throw err;
     start();
-})
+});
 
 const start = () => {
     inquirer
@@ -23,23 +23,39 @@ const start = () => {
             message: 'What would you like to do?',
             choices: ['View departments', 'View roles', 'View employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee roles', 'Exit'],
         })
-        .then((answer) => {
-            if (answer.whatToDo === 'View departments') {
-                viewDept();
-            } else if (answer.whatToDo === 'View roles') {
-                viewRoles();
-            } else if (answer.whatToDo === 'View employees') {
-                viewEmp();
-            } else if (answer.whatToDo === 'Add a department') {
-                addDept();
-            } else if (answer.whatToDo === 'Add a role') {
-                addRole();
-            } else if (answer.whatToDo === 'Add an employee') {
-                addEmp();
-            } else if (answer.whatToDo === 'Update employee roles') {
-                updateEmpRole();
-            } else {
-                connection.end();
+        .then((answer) => {   //use switch, case ?
+            switch (answer.whatToDo)  {
+                case 'View departments':
+                    viewDept();
+                    break;
+
+                case 'View roles':
+                    viewRoles();
+                    break;
+
+                case 'View employees':
+                    viewEmp();
+                    break;
+
+                case 'Add a department':
+                    addDept();
+                    break;
+
+                case 'Add a role':
+                    addRole();
+                    break;
+
+                case 'Add an employee':
+                    addEmp();
+                    break;
+
+                case 'Update employee roles':
+                    updateEmpRole();
+                    break;
+            
+                case 'Exit':
+                    connection.end();
+                    break;
             }
         });
 };
