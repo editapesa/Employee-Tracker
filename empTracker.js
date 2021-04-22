@@ -70,3 +70,14 @@ const viewDept = () => {
     );
     console.log(query.sql);
 };
+
+const viewRoles = () => {
+    const query = connection.query('select * from role', (err, res) => {
+            if (err) throw (err);
+            res.forEach(({ id, title, salary, department_id}) => {
+                console.table(`${id} | ${title} | ${salary} | ${department_id}`);
+            });
+        }
+    );
+    console.log(query.sql);
+};
