@@ -23,7 +23,7 @@ const start = () => {
             message: 'What would you like to do?',
             choices: ['View departments', 'View roles', 'View employees', 'Add a department', 'Add a role', 'Add an employee', 'Update employee roles', 'Exit'],
         })
-        .then((answer) => {   //use switch, case ?
+        .then((answer) => {   
             switch (answer.whatToDo)  {
                 case 'View departments':
                     viewDept();
@@ -58,4 +58,15 @@ const start = () => {
                     break;
             }
         });
+};
+
+const viewDept = () => {
+    const query = connection.query('select * from department', (err, res) => {
+            if (err) throw (err);
+            res.forEach(({ id, name}) => {
+                console.table(`${id} | ${name}`);
+            });
+        }
+    );
+    console.log(query.sql);
 };

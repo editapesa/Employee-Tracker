@@ -25,3 +25,7 @@ create table employee (
     manager_id integer null auto_increment,
     primary key (id)
 );
+
+select * from department;
+select * from role;
+select * from employee;
