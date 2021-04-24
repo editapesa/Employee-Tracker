@@ -63,11 +63,9 @@ const start = () => {
 const viewDept = () => {
     connection.query('select * from department', (err, res) => {
             if (err) throw (err);
-            console.log(res);
+            console.table(res);
             start();
-            });
-            // console.log(cTable);
-            
+            });            
 };
 
 const viewRoles = () => {
@@ -81,7 +79,7 @@ const viewRoles = () => {
 const viewEmp = () => {
     connection.query('select * from employee', (err, res) => {
             if (err) throw (err);
-            console.log(res);
+            console.table(res);
             start();
             });
 };
