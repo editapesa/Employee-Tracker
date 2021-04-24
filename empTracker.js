@@ -61,34 +61,81 @@ const start = () => {
 };
 
 const viewDept = () => {
-    const query = connection.query('select * from department', (err, res) => {
+    connection.query('select * from department', (err, res) => {
             if (err) throw (err);
-            res.forEach(({ id, name}) => {
-                console.table(`${id} | ${name}`);
+            console.log(res);
+            start();
             });
-        }
-    );
-    console.log(query.sql);
+            // console.log(cTable);
+            
 };
 
 const viewRoles = () => {
-    const query = connection.query('select * from role', (err, res) => {
+    connection.query('select * from role', (err, res) => {
             if (err) throw (err);
-            res.forEach(({ id, title, salary, department_id}) => {
-                console.table(`${id} | ${title} | ${salary} | ${department_id}`);
+            console.table(res);
+            start();
             });
-        }
-    );
-    console.log(query.sql);
 };
 
 const viewEmp = () => {
-    const query = connection.query('select * from employee', (err, res) => {
+    connection.query('select * from employee', (err, res) => {
             if (err) throw (err);
-            res.forEach(({ id, first_name, last_name}) => {
-                console.table(`${id} | ${first_name} | ${last_name}`);
+            console.log(res);
+            start();
             });
-        }
-    );
-    console.log(query.sql);
+};
+
+const addDept = () => {
+    inquirer
+        .prompt({
+            name: 'addDept',
+            type: 'input',
+            message: 'What is the name of the department you would like to add?',
+        })
+        .then((answer) => {
+            connection.query(`insert into department (name) values ('${answer.addDept}')`)
+            console.log(`\n${answer.addDept} has been added to departments.\n`)
+            start();
+        });
+};
+
+const addRole = () => {
+    inquirer
+        .prompt({
+            name: 'addRole',
+            type: 'input',
+            message: 'What role title would you like to add?',
+        })
+        .then((answer) => {
+            connection.query(`insert into role (title) values ('${answer.addRole}')`)
+            console.log(`\n${answer.addRole} has been added to employee roles.\n`)
+            start();
+        });
+};
+
+const addEmp = () => {
+    inquirer
+        .prompt([
+            {
+                name: 'EmpFirstName',
+                type: 'input',
+                message: "What is the employee's first name?",
+            },
+            {
+                name: 'EmpLastName',
+                type: 'input',
+                message: "What is the employee's last name?",
+            },
+            {
+                name: 'EmpRole',
+                type: 'input',
+                message: "What is the employee's role?",
+            },
+        ])
+        .then((answer) => {
+            connection.query(`insert into employee (first_name, last_name, role_id) values ('${answer.EmpFirstName}, ${answer.EmpLastName}, ${answer.EmpRole}')`)
+            console.log(`\n${answer.EmpFirstName} ${answer.EmpLastName} has been added to the employee list.\n`)
+            start();
+        });
 };
