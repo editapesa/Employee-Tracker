@@ -19,14 +19,14 @@ select * from department;
 select * from role;
 select * from employee;
 
-select title, first_name, last_name 
-from role
-inner join employee on role.title = employee.title;
+-- select title, first_name, last_name 
+-- from role
+-- inner join employee on role.title = employee.title;
 
-select title, name
-from department
-inner join role on department.name = title.department;
+-- select title, name
+-- from department
+-- inner join role on department.name = title.department;
 
-select name, first_name, last_name
-from department
-inner join employee on department.name = employee.name; 
+-- select name, first_name, last_name
+-- from department
+-- inner join employee on department.name = employee.name; 

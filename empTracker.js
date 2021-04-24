@@ -81,3 +81,14 @@ const viewRoles = () => {
     );
     console.log(query.sql);
 };
+
+const viewEmp = () => {
+    const query = connection.query('select * from employee', (err, res) => {
+            if (err) throw (err);
+            res.forEach(({ id, first_name, last_name}) => {
+                console.table(`${id} | ${first_name} | ${last_name}`);
+            });
+        }
+    );
+    console.log(query.sql);
+};
