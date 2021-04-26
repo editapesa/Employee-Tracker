@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+const { restoreDefaultPrompts } = require('inquirer');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -137,3 +138,49 @@ const addEmp = () => {
             start();
         });
 };
+
+const updateEmpRole = () => {
+    connection.query('select (first_name, last_name) from employee', (err, res) => {
+        if (err) throw err;
+
+    inquirer
+        .prompt([
+            {
+                name: 'empChangingRole',
+                type: 'rawlist',
+                choices() {
+                    const empArray = [];
+                    results.forEach(({ first_name, last_name }) => {
+                        empArray.push(first_name, last_name);
+                    });
+                    return empArray;
+                },
+                message: 'Which employee would you like to update',
+            },
+        ])
+    }),
+    connection.query('select title from role', (err, res) => {
+        if (err) throw err;
+
+        inquirer
+        .prompt([
+            {
+                name: 'empNewRole',
+                type: 'rawlist',
+                choices() {
+                    const roleArray = [];
+                    results.forEach(({ title }) => {
+                        roleArray.push(title);
+                    });
+                    return roleArray;
+                },
+                message: "What is the employee's new role?",
+            },
+        ])
+        .then((answer) => {
+            // connection.query(`insert into employee (first_name, last_name, role_id) values ('${answer.EmpFirstName}, ${answer.EmpLastName}, ${answer.EmpRole}')`)
+            console.log(`\n${answer.empChangingRole}'s has been updated to ${answer.empNewRole}\n`)
+            start();
+        });
+    })
+}
