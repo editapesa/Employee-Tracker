@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const { restoreDefaultPrompts } = require('inquirer');
+// const { restoreDefaultPrompts } = require('inquirer');   ??? where did that come from?
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -56,6 +56,7 @@ const start = () => {
             
                 case 'Exit':
                     connection.end();
+                    console.log('Goodbye!');
                     break;
             }
         });
@@ -133,14 +134,14 @@ const addEmp = () => {
             },
         ])
         .then((answer) => {
-            connection.query(`insert into employee (first_name, last_name, role_id) values ('${answer.EmpFirstName}, ${answer.EmpLastName}, ${answer.EmpRole}')`)
+            connection.query(`insert into employee (first_name, last_name) values ('${answer.EmpFirstName}, ${answer.EmpLastName}')`)
             console.log(`\n${answer.EmpFirstName} ${answer.EmpLastName} has been added to the employee list.\n`)
             start();
         });
 };
 
 const updateEmpRole = () => {
-    connection.query('select (first_name, last_name) from employee', (err, res) => {
+    connection.query('select * from employee', (err, res) => {
         if (err) throw err;
 
     inquirer
@@ -150,37 +151,24 @@ const updateEmpRole = () => {
                 type: 'rawlist',
                 choices() {
                     const empArray = [];
-                    results.forEach(({ first_name, last_name }) => {
-                        empArray.push(first_name, last_name);
+                    res.forEach(({ first_name }) => {
+                        empArray.push(first_name);
                     });
                     return empArray;
                 },
                 message: 'Which employee would you like to update',
             },
-        ])
-    }),
-    connection.query('select title from role', (err, res) => {
-        if (err) throw err;
-
-        inquirer
-        .prompt([
             {
                 name: 'empNewRole',
-                type: 'rawlist',
-                choices() {
-                    const roleArray = [];
-                    results.forEach(({ title }) => {
-                        roleArray.push(title);
-                    });
-                    return roleArray;
-                },
-                message: "What is the employee's new role?",
+                type: 'input',
+                message: "What is the employee's new role?",            
             },
         ])
         .then((answer) => {
-            // connection.query(`insert into employee (first_name, last_name, role_id) values ('${answer.EmpFirstName}, ${answer.EmpLastName}, ${answer.EmpRole}')`)
-            console.log(`\n${answer.empChangingRole}'s has been updated to ${answer.empNewRole}\n`)
+            connection.query(`insert into role (title) values ('${answer.empNewRole}')`)
+            console.log(`\n${answer.empChangingRole}'s role has been updated to ${answer.empNewRole}\n`)
             start();
+            })
         });
-    })
 }
+    
