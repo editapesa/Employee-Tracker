@@ -17,5 +17,5 @@ Click the link below to see a video of how the application works.
 
 [Employee Tracker](url.com)
 
-![demo pic 1](Assets\demo-pic.png)
+![demo pic 1](Assets/demo-pic.png)
 
