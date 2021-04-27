@@ -13,7 +13,7 @@ insert into employee (first_name, last_name, role_id, manager_id) values ('Chris
 insert into employee (first_name, last_name, role_id, manager_id) values ('Jenny', 'Anderson', 5, null);
 insert into employee (first_name, last_name, role_id, manager_id) values ('Lola', 'Mess', 6, 3);
 insert into employee (first_name, last_name, role_id, manager_id) values ('Anthony', 'Gallo', 7, null);
-insert into employee (first_name, last_name, role_id, manager_id) values ('Frankie', 'Furter', 8, 4);
+insert into employee (first_name, last_name, role_id, manager_id) values ('Frankie', 'Furter', 8, null);
 
 select * from department;
 select * from role;
