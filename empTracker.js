@@ -1,7 +1,6 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-// const { restoreDefaultPrompts } = require('inquirer');   ??? where did that come from?
 
 const connection = mysql.createConnection({
     host: 'localhost',
