@@ -14,6 +14,7 @@ create table role (
     title varchar(30) not null,
     salary decimal(19, 2) null,
     department_id integer not null,
+    index dep_ind (department_id),
     foreign key (department_id) references department(id),
     primary key (id)
 );

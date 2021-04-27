@@ -164,7 +164,7 @@ const updateEmpRole = () => {
             },
         ])
         .then((answer) => {
-            connection.query(`insert into role (title) values ('${answer.empNewRole}')`)
+            // connection.query(`insert into role (title) values ('${answer.empNewRole}')`)
             console.log(`\n${answer.empChangingRole}'s role has been updated to ${answer.empNewRole}\n`)
             start();
             })
