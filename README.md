@@ -15,7 +15,7 @@ This project is licensed under the MIT license. Click the link below for more in
 ## Usage
 Click the link below to see a video of how the application works.
 
-[Employee Tracker](url.com)
+[Employee Tracker](https://drive.google.com/file/d/10cT0AuwOwgGlzhtX4v2BIFWuto3Bd6Yx/view)
 
 ![demo pic 1](Assets/demo-pic.png)
 
